@@ -34,8 +34,8 @@ mongoose
   .catch(err => console.log(err));
 
 // Load Routes
-// app.use('/api/users', users);
-// app.use('/api/contacts', contacts);
+app.use('/api/users', users);
+app.use('/api/contacts', contacts);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
