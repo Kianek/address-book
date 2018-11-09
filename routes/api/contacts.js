@@ -8,9 +8,23 @@ router.get('/test', (req, res) => {
   res.json({ msg: 'Contacts works' });
 });
 
+router.get('/current', (req, res) => {
+  res.json(req.user);
+});
+
 // GET /api/contacts/
 // Get all contacts
-router.get('/', passport.authenticate('local'), (req, res) => {});
+router.get('/', ensureAuthenticated, (req, res) => {
+  User.findOne({ _id: req.user.id })
+    .then(user => {
+      if (!user) {
+        res.status(404).json({ msg: 'No such user' });
+      }
+      // If the user is found, return the array of contacts
+      res.status(200).json(user.contacts);
+    })
+    .catch(err => console.log(err));
+});
 
 // POST /api/contacts/add
 // Add a new contact
