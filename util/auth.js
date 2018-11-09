@@ -1,6 +1,12 @@
 const bcrypt = require('bcryptjs');
 
 module.exports = {
+  ensureAuthenticated: (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+    res.json({ msg: 'Not logged in' });
+  },
   hashPassword: password => {
     console.log(password);
     if (!password) {
