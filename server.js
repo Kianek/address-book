@@ -9,6 +9,9 @@ const users = require('./routes/api/users');
 
 const app = express();
 
+// Configure Passport
+require('./config/passport')(passport);
+
 // Initialize Middleware
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
