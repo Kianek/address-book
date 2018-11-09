@@ -73,7 +73,25 @@ router.put('/:id/update', ensureAuthenticated, (req, res) => {
 
 // DELETE /api/contacts/:id/delete
 // Delete a single contact
-router.delete('/:id/delete', ensureAuthenticated, (req, res) => {});
+router.delete('/:id/delete', ensureAuthenticated, (req, res) => {
+  const query = { _id: req.user.id };
+  User.findOne(query)
+    .then(user => {
+      if (!user) {
+        res.status(404).json({ msg: 'Unable to find user' });
+      }
+      const delContact = user.contacts.id(req.params.id);
+      user.contacts = user.contacts.filter(
+        contact => contact._id !== delContact._id
+      );
+      console.log(user.contacts);
+      user
+        .save()
+        .then(user => res.status(200).json(user))
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+});
 
 // DELETE /api/contacts/delete-all
 // Delete all contacts
