@@ -1,15 +1,17 @@
 const bcrypt = require('bcryptjs');
 
-module.export = {
+module.exports = {
   hashPassword: password => {
+    console.log(password);
     if (!password) {
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, salt, (err, hash) => {
-          if (err) throw err;
-          const hashedPassword = hash;
-          return hashedPassword;
-        });
-      });
+      return null;
     }
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(password, salt, (err, hash) => {
+        if (err) throw err;
+        const hashedPassword = hash;
+        return hashedPassword;
+      });
+    });
   },
 };
