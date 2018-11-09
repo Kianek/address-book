@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const router = require('express').Router();
+const passport = require('passport');
+const { ensureAuthenticated } = require('../../util/auth');
+const User = require('../../models/User.js');
 
 router.get('/test', (req, res) => {
   res.json({ msg: 'Contacts works' });
@@ -7,7 +10,7 @@ router.get('/test', (req, res) => {
 
 // GET /api/contacts/
 // Get all contacts
-router.get('/', (req, res) => {});
+router.get('/', passport.authenticate('local'), (req, res) => {});
 
 // POST /api/contacts/add
 // Add a new contact

@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const router = require('express').Router();
-const auth = require('../../util/auth');
+const { ensureAuthenticated } = require('../../util/auth');
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 
 router.get('/test', (req, res) => {
   res.json({ msg: 'Users works' });
+});
+
+// GET /api/users/login
+router.get('/login', ensureAuthenticated, (req, res) => {
+  res.json({ msg: 'Logged in' });
 });
 
 // POST /api/users/login
