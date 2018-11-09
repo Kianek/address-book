@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const router = require('express').Router();
 const passport = require('passport');
 const { ensureAuthenticated } = require('../../util/auth');
+const { createContact } = require('../../util/contacts');
 const User = require('../../models/User.js');
 
 router.get('/test', (req, res) => {
@@ -50,14 +51,43 @@ router.post('/add', ensureAuthenticated, (req, res) => {
 
 // PUT /api/contacts/:id/update
 // Update a single contact
-router.put('/:id/update', (req, res) => {});
+router.put('/:id/update', ensureAuthenticated, (req, res) => {
+  const contactId = req.params.id;
+  const query = { _id: req.user.id };
+  User.findOne(query)
+    .then(user => {
+      if (!user) {
+        res.status(404).json({ msg: 'Unable to find user' });
+      }
+
+      const updateContact = user.contacts.id(contactId);
+      updateContact.set(createContact(req.body));
+
+      user
+        .save()
+        .then(user => res.status(202).json(user))
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+});
 
 // DELETE /api/contacts/:id/delete
 // Delete a single contact
-router.delete('/:id/delete', (req, res) => {});
+router.delete('/:id/delete', ensureAuthenticated, (req, res) => {});
 
 // DELETE /api/contacts/delete-all
 // Delete all contacts
-router.delete('/delete-all', (req, res) => {});
+router.delete('/delete-all', ensureAuthenticated, (req, res) => {
+  const query = { _id: req.user.id };
+  User.findOne(query)
+    .then(user => {
+      user.contacts = [];
+      user
+        .save()
+        .then(user => res.json(user))
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+});
 
 module.exports = router;
