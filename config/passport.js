@@ -25,7 +25,7 @@ module.exports = passport => {
   );
 
   passport.serializeUser((user, done) => {
-    User.findById(id, (err, user) => {
+    User.findById(user.id, (err, user) => {
       done(err, user);
     });
   });
