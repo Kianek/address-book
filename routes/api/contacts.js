@@ -18,7 +18,7 @@ router.get('/', ensureAuthenticated, (req, res) => {
   User.findOne({ _id: req.user.id })
     .then(user => {
       if (!user) {
-        res.status(404).json({ msg: 'No such user' });
+        res.status(404).json({ msg: 'Unable to find user' });
       }
       // If the user is found, return the array of contacts
       res.status(200).json(user.contacts);
@@ -28,7 +28,25 @@ router.get('/', ensureAuthenticated, (req, res) => {
 
 // POST /api/contacts/add
 // Add a new contact
-router.post('/add', (req, res) => {});
+router.post('/add', ensureAuthenticated, (req, res) => {
+  const { name, phone, email, address } = req.body;
+
+  const query = { _id: req.user.id };
+  User.findOne(query)
+    .then(user => {
+      if (!user) {
+        res.status(404).json({ msg: 'Unable to find user' });
+      }
+
+      const newContact = { name, phone, email, address };
+      user.contacts.push(newContact);
+      user
+        .save()
+        .then(user => res.status(201).json(user))
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+});
 
 // PUT /api/contacts/:id/update
 // Update a single contact
