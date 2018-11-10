@@ -5,10 +5,12 @@ const { ensureAuthenticated } = require('../../util/auth');
 const { createContact } = require('../../util/contacts');
 const User = require('../../models/User.js');
 
+// TODO: get rid of this later
 router.get('/test', (req, res) => {
   res.json({ msg: 'Contacts works' });
 });
 
+// TODO: get rid of this later
 router.get('/current', (req, res) => {
   res.json(req.user);
 });
