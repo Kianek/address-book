@@ -43,6 +43,7 @@ router.post('/add', ensureAuthenticated, (req, res) => {
 
       const newContact = { name, phone, email, address };
       user.contacts.push(newContact);
+
       user
         .save()
         .then(user => res.status(201).json(user))
@@ -55,6 +56,7 @@ router.post('/add', ensureAuthenticated, (req, res) => {
 // Update a single contact
 router.put('/:id/update', ensureAuthenticated, (req, res) => {
   const contactId = req.params.id;
+
   const query = { _id: req.user.id };
   User.findOne(query)
     .then(user => {
@@ -62,7 +64,11 @@ router.put('/:id/update', ensureAuthenticated, (req, res) => {
         res.status(404).json({ msg: 'Unable to find user' });
       }
 
+      // Locate the contact in the array
       const updateContact = user.contacts.id(contactId);
+
+      // Extract the updated information, and set to a
+      // new contact object
       updateContact.set(createContact(req.body));
 
       user
