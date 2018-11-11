@@ -16,12 +16,20 @@ router.get('/login', ensureAuthenticated, (req, res) => {
 
 // POST /api/users/login
 router.post('/login', passport.authenticate('local'), (req, res) => {
-  User.findOne({ email: req.body.email }).then(user => {
+  const { email } = req.body;
+
+  User.findOne({ email }).then(user => {
     if (!user) {
+      // TODO: make error handling more consistent
       res.status(404).json({ msg: 'That email is not registered' });
     }
-
-    res.status(200).json(user);
+    const authenticatedUser = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      contacts: user.contacts,
+    };
+    res.status(200).json(authenticatedUser);
   });
 });
 
