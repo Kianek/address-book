@@ -3,6 +3,7 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const helmet = require('helmet');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const contacts = require('./routes/api/contacts');
 const users = require('./routes/api/users');
@@ -14,6 +15,7 @@ require('./config/passport')(passport);
 
 // Initialize Middleware
 app.use(helmet());
+app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(
