@@ -23,8 +23,8 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
       // TODO: make error handling more consistent
       res.status(404).json({ msg: 'That email is not registered' });
     }
+
     const authenticatedUser = {
-      id: user.id,
       name: user.name,
       email: user.email,
       contacts: user.contacts,
