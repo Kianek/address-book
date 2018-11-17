@@ -42,11 +42,13 @@ router.post('/add', ensureAuthenticated, (req, res) => {
       }
 
       const newContact = { name, phone, email, address };
-      user.contacts.push(newContact);
+      user.contacts.unshift(newContact);
 
+      // The client already has the relevant user info,
+      // so only return the updated contacts array
       user
         .save()
-        .then(user => res.status(201).json(user))
+        .then(user => res.status(201).json(user.contacts))
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
@@ -108,6 +110,7 @@ router.delete('/delete-all', ensureAuthenticated, (req, res) => {
   User.findOne(query)
     .then(user => {
       user.contacts = [];
+      // TODO: No need to return the user object
       user
         .save()
         .then(user => res.json(user))
