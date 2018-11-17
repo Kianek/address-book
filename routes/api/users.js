@@ -25,6 +25,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     }
 
     const authenticatedUser = {
+      id: user._id,
       name: user.name,
       email: user.email,
       contacts: user.contacts,
