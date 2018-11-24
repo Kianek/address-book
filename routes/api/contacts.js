@@ -4,7 +4,6 @@ const passport = require('passport');
 const { ensureAuthenticated } = require('../../util/auth');
 const User = require('../../models/User.js');
 
-// TODO: confirm whether this route is necessary
 router.get('/:id', ensureAuthenticated, (req, res) => {
   const query = { _id: req.user.id };
   User.findOne(query)
@@ -117,10 +116,9 @@ router.delete('/delete-all', ensureAuthenticated, (req, res) => {
   User.findOne(query)
     .then(user => {
       user.contacts = [];
-      // TODO: No need to return the user object
       user
         .save()
-        .then(user => res.json(user))
+        .then(user => res.sendStatus(200))
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
