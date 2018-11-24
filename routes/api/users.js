@@ -1,13 +1,8 @@
-const mongoose = require('mongoose');
 const passport = require('passport');
 const router = require('express').Router();
 const { ensureAuthenticated } = require('../../util/auth');
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
-
-router.get('/test', (req, res) => {
-  res.json({ msg: 'Users works' });
-});
 
 // GET /api/users/login
 router.get('/login', ensureAuthenticated, (req, res) => {
@@ -20,7 +15,6 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 
   User.findOne({ email }).then(user => {
     if (!user) {
-      // TODO: make error handling more consistent
       res.status(404).json({ msg: 'That email is not registered' });
     }
 
