@@ -2,17 +2,24 @@ const mongoose = require('mongoose');
 const router = require('express').Router();
 const passport = require('passport');
 const { ensureAuthenticated } = require('../../util/auth');
-const { createContact } = require('../../util/contacts');
 const User = require('../../models/User.js');
 
-// TODO: get rid of this later
-router.get('/test', (req, res) => {
-  res.json({ msg: 'Contacts works' });
-});
+// TODO: confirm whether this route is necessary
+router.get('/:id', ensureAuthenticated, (req, res) => {
+  const query = { _id: req.user.id };
+  User.findOne(query)
+    .then(user => {
+      if (!user) {
+        res.status(404).json({ msg: 'Unable to find user' });
+      }
 
-// TODO: get rid of this later
-router.get('/current', (req, res) => {
-  res.json(req.user);
+      const contact = user.contacts.find(c => {
+        return c._id === req.params.id;
+      });
+
+      res.status(200).json(contact);
+    })
+    .catch(err => console.log(err));
 });
 
 // GET /api/contacts/
@@ -71,11 +78,11 @@ router.put('/:id/update', ensureAuthenticated, (req, res) => {
 
       // Extract the updated information, and set to a
       // new contact object
-      updateContact.set(createContact(req.body));
+      updateContact.set(req.body);
 
       user
         .save()
-        .then(user => res.status(202).json(user))
+        .then(user => res.status(202).json(user.contacts))
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
