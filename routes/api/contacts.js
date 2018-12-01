@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
 const router = require('express').Router();
-const passport = require('passport');
 const { ensureAuthenticated } = require('../../util/auth');
 const User = require('../../models/User.js');
 
@@ -29,6 +27,7 @@ router.get('/', ensureAuthenticated, (req, res) => {
       if (!user) {
         res.status(404).json({ msg: 'Unable to find user' });
       }
+
       // If the user is found, return the array of contacts
       res.status(200).json(user.contacts);
     })
@@ -96,11 +95,12 @@ router.delete('/:id/delete', ensureAuthenticated, (req, res) => {
       if (!user) {
         res.status(404).json({ msg: 'Unable to find user' });
       }
+
       const delContact = user.contacts.id(req.params.id);
       user.contacts = user.contacts.filter(
         contact => contact._id !== delContact._id
       );
-      console.log(user.contacts);
+
       user
         .save()
         .then(user => res.status(200).json(user))
