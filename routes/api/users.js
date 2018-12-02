@@ -63,4 +63,19 @@ router.post('/register', (req, res) => {
   });
 });
 
+// /api/users/delete
+// Delete the user's account
+router.delete(`/delete`, ensureAuthenticated, (req, res) => {
+  const query = { _id: req.user.id };
+
+  User.deleteOne(query)
+    .then(() => {
+      res
+        .status(200)
+        .json({ msg: 'Account deleted' })
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+});
+
 module.exports = router;
