@@ -70,6 +70,7 @@ router.delete(`/delete`, ensureAuthenticated, (req, res) => {
 
   User.deleteOne(query)
     .then(() => {
+      req.logout();
       res
         .status(200)
         .json({ msg: 'Account deleted' })
