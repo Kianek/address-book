@@ -29,7 +29,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Initialize MongoDB
-const db = require('./config/mongo').uri;
+const db = require('./config/keys_dev').uri;
 mongoose
   .connect(
     db,
