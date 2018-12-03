@@ -118,7 +118,7 @@ router.delete('/delete-all', ensureAuthenticated, (req, res) => {
       user.contacts = [];
       user
         .save()
-        .then(user => res.sendStatus(200))
+        .then(() => res.sendStatus(200))
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
