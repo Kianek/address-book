@@ -2,6 +2,8 @@ const router = require('express').Router();
 const { ensureAuthenticated } = require('../../util/auth');
 const User = require('../../models/User.js');
 
+// GET /api/contacts/:id
+// Get a single contact
 router.get('/:id', ensureAuthenticated, (req, res) => {
   const query = { _id: req.user.id };
   User.findOne(query)

@@ -1,0 +1,8 @@
+export const GET_CONTACTS = 'GET_CONTACTS';
+export const GET_CONTACTS_SUCCESS = 'GET_CONTACTS_SUCCESS';
+export const GET_CONTACTS_FAILURE = 'GET_CONTACTSFAILURE';
+export const GET_CONTACT = 'GET_CONTACT';
+export const EDIT_CONTACT = 'EDIT_CONTACT';
+export const ADD_CONTACT = 'ADD_CONTACT';
+export const LOADING = 'LOADING';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
