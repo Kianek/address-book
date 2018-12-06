@@ -18,11 +18,12 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
       res.status(404).json({ msg: 'That email is not registered' });
     }
 
+    // TODO: confirm that contacts shouldn't be set here
     const authenticatedUser = {
       id: user._id,
       name: user.name,
-      email: user.email,
-      contacts: user.contacts,
+      // email: user.email,
+      // contacts: user.contacts,
     };
     res.status(200).json(authenticatedUser);
   });
