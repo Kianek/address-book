@@ -1,0 +1,22 @@
+@import '../../../App.scss';
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  margin: 3em auto 5em;
+  align-content: center;
+  overflow-y: auto;
+}
+.form {
+  background-color: $whiteish;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 2em 1em;
+  width: 20em;
+}
+.form__title {
+  margin-bottom: 0.7em;
+  text-align: center;
+}
