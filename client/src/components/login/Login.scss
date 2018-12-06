@@ -1,0 +1,32 @@
+@import '../../App.scss';
+
+// TODO: refactor to App.scss
+.login-container {
+  // display: flex;
+  // margin: 3em auto 0;
+  // align-content: center;
+}
+
+.login {
+  display: flex;
+  height: 100%;
+  // margin: 0 auto;
+  margin: 3em auto 0;
+  align-content: center;
+}
+
+.login__button {
+  background-color: $light-gray;
+  border: none;
+  border-radius: 0.5em;
+  font-size: 1em;
+  height: 2.5em;
+  margin: 0 auto;
+  width: 13em;
+  transition: 0.2s;
+}
+.login__button:hover {
+  background-color: $dark-gray;
+  color: $white;
+  cursor: pointer;
+}
