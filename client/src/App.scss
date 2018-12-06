@@ -1,32 +1,29 @@
-.App {
-  text-align: center;
+/* Global Colors */
+$dark-gray: #6b6b6b;
+$light-gray: #bdbdbd;
+$deep-red: #d90429;
+$bright-red: #ef233c;
+$light-red: #ff4f4f;
+$light-blue: #49bcff;
+$whiteish: #edf2f4;
+$white: #fff;
+
+/* Form Styles?? */
+
+// TODO: write a button component
+.btnBack {
+  color: $dark-gray;
+}
+.btnBack:hover {
+  color: $light-blue;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btnSubmit {
+  border: none;
+  border-radius: 0.5em;
+  font-size: 1em;
+  height: 2.5em;
+  margin: 0 auto;
+  width: 13em;
+  transition: 0.2s;
 }
