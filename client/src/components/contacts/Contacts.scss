@@ -1,0 +1,51 @@
+@import '../../App.scss';
+
+.contacts {
+  margin: 1em auto;
+  width: 80%;
+}
+.contacts__heading {
+  text-align: center;
+}
+.contacts__controls {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  height: 4em;
+  width: 70%;
+}
+.contacts__controls__button--add {
+  background-color: $light-gray;
+  border-radius: 0.5em;
+  color: $white;
+  font-weight: 500;
+  padding: 0.5em 1em;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.contacts__controls__button--add:hover {
+  background-color: $success;
+  cursor: pointer;
+}
+.contacts__controls__button--delete-all {
+  background-color: $light-gray;
+  border: none;
+  border-radius: 0.5em;
+  color: $white;
+  font-family: Arial;
+  font-size: 1em;
+  margin-left: auto;
+  padding: 0.5em 1em;
+  transition: 0.2s;
+}
+.contacts__controls__button--delete-all:hover {
+  background-color: $danger;
+  cursor: pointer;
+}
+.contacts__list {
+  height: 75vh;
+  align-content: center;
+  margin-top: 1em;
+  overflow-y: auto;
+}
