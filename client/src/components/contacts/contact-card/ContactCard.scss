@@ -1,0 +1,29 @@
+@import '../../../App.scss';
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $whiteish;
+  border-radius: 0.5em;
+  font-size: 1.1em;
+  margin: 1em auto;
+  padding: 1em;
+  width: 300px;
+
+  .heading {
+    margin-top: 0.5em;
+  }
+
+  p {
+    margin-top: 0.5em;
+  }
+  .street-address {
+    display: flex;
+    flex-direction: column;
+  }
+  .city-state-zip {
+    display: flex;
+    flex-direction: column;
+  }
+}
