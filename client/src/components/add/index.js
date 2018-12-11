@@ -30,9 +30,9 @@ class AddContact extends Component {
     return (
       <div className="add-contact-page">
         <div className="form-container">
-          <Link to="/" className="btnBack">
+          <Link to="/contacts" className="btnBack">
             <i className="fas fa-arrow-circle-left" />
-            Back to Login
+            Back to Contacts
           </Link>
           <Form title="Add Contact" onSubmit={this.onSubmit}>
             <InputField
