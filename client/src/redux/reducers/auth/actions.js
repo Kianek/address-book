@@ -1,30 +1,30 @@
 import axios from 'axios';
-import {
-  LOGOUT,
-  LOGIN_IN_PROGRESS,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-} from './types';
+import { LOGOUT, LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from './types';
 
-/**
- * Attempt login with user-supplied credentials
- *
- * The credentials supplied are an email address and a password
- * */
-export const login = credentials => dispatch => {
-  dispatch({ type: LOGIN_IN_PROGRESS });
+/* Simple Action Creators */
+const beginLogin = () => ({ type: LOGIN });
+const loginSuccessful = data => ({
+  type: LOGIN_SUCCESS,
+  payload: data,
+});
+const loginUnsuccessful = err => ({
+  type: LOGIN_FAILURE,
+  payload: err,
+});
+
+// export const login = credentials => dispatch => {
+export const login = (credentials, history) => dispatch => {
+  dispatch(beginLogin());
   axios
     .post(`/api/users/login`, credentials)
-    .then(res =>
-      dispatch({
-        type: LOGIN_SUCCESS,
-        payload: res.data,
-      })
-    )
-    .catch(err => console.log(err), dispatch({ type: LOGIN_FAILURE }));
+    .then(res => dispatch(loginSuccessful(res.data)))
+    .then(() => history.replace('/contacts'))
+    .catch(err => {
+      console.log(err);
+      dispatch(loginUnsuccessful(err));
+    });
 };
 
-// Log out
 export const logout = () => {
   return {
     type: LOGOUT,
