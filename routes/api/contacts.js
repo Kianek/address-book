@@ -39,8 +39,6 @@ router.get('/', ensureAuthenticated, (req, res) => {
 // POST /api/contacts/add
 // Add a new contact
 router.post('/add', ensureAuthenticated, (req, res) => {
-  const { name, phone, email, address } = req.body;
-
   const query = { _id: req.user.id };
   User.findOne(query)
     .then(user => {
@@ -48,7 +46,7 @@ router.post('/add', ensureAuthenticated, (req, res) => {
         res.status(404).json({ msg: 'Unable to find user' });
       }
 
-      const newContact = { name, phone, email, address };
+      const newContact = req.body;
       user.contacts.unshift(newContact);
 
       // The client already has the relevant user info,
