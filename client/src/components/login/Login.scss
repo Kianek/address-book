@@ -30,3 +30,9 @@
   color: $white;
   cursor: pointer;
 }
+.login__error {
+  color: $danger;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
