@@ -1,13 +1,8 @@
-import {
-  LOGOUT,
-  LOGIN_IN_PROGRESS,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-} from './types';
+import { LOGOUT, LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from './types';
 
 const initialState = {
   isAuthenticated: false,
-  authError: false,
+  error: false,
   loading: false,
 };
 
@@ -23,9 +18,10 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: false,
-        authError: true,
+        error: true,
+        loading: false,
       };
-    case LOGIN_IN_PROGRESS:
+    case LOGIN:
       return {
         ...state,
         loading: true,
