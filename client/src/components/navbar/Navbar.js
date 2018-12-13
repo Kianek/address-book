@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { logout } from '../../redux/reducers/auth/actions';
 
 import './Navbar.scss';
 
@@ -11,7 +12,7 @@ function Navbar(props) {
         <Link to="/contacts" className="navbar__branding">
           Address Book
         </Link>
-        <Link to="/" className="navbar__link">
+        <Link to="/" className="navbar__link" onClick={props.logout}>
           Logout
         </Link>
       </nav>
@@ -33,4 +34,7 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(
+  mapStateToProps,
+  { logout }
+)(Navbar);
