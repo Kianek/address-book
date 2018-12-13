@@ -25,8 +25,9 @@ export const login = (credentials, history) => dispatch => {
     });
 };
 
-export const logout = () => {
-  return {
-    type: LOGOUT,
-  };
+export const logout = () => dispatch => {
+  axios
+    .get(`/api/users/logout`)
+    .then(() => dispatch({ type: LOGOUT }))
+    .catch(err => console.log(err));
 };
