@@ -17,7 +17,8 @@ class Contacts extends Component {
     this.props.fetchContacts();
   }
 
-  format = contacts => contacts.map(contact => <ContactCard {...contact} />);
+  format = contacts =>
+    contacts.map(contact => <ContactCard key={contact._id} {...contact} />);
 
   render() {
     const { contacts, isContactsEmpty, isLoading } = this.props;
