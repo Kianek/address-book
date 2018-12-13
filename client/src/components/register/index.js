@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../../App.scss';
 import './Register.scss';
 import Form from '../common/form/Form';
@@ -19,6 +20,17 @@ class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    // TODO: check for invalid input
+    const { name, email, password } = this.state;
+    const newUser = {
+      name,
+      email,
+      password,
+    };
+    axios
+      .post(`/api/users/register`, newUser)
+      .then(this.props.history.replace('/'))
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -44,12 +56,14 @@ class Register extends Component {
             />
             <InputField
               label="Password"
+              type="password"
               name="password"
               value={this.state.password}
               onChange={this.onChange}
             />
             <InputField
               label="Confirm Password"
+              type="password"
               name="password2"
               value={this.state.password2}
               onChange={this.onChange}
