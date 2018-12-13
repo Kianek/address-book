@@ -1,4 +1,5 @@
 /* Global Colors */
+$black: #000;
 $gun-metal: #2b2d42;
 $dark-gray: #6b6b6b;
 $light-gray: #bdbdbd;
@@ -9,6 +10,10 @@ $light-blue: #49bcff;
 $success: #00e000;
 $whiteish: #edf2f4;
 $white: #fff;
+
+/* Shadows */
+$bottom-shadow: 0 8px 5px -4px rgba(0, 0, 0, 0.2);
+$shadow: 8px 8px 5px rgba(0, 0, 0, 0.2), -5px -5px -4px rgba(0, 0, 0, 0.2);
 
 /* Form Styles?? */
 
