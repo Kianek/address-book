@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../redux/reducers/auth/actions';
+import { selectLoginError, selectAuthStatus } from '../../redux/reducers/auth';
+
 import Form from '../common/form/Form';
 import InputField from '../common/input-field';
 
@@ -8,9 +10,13 @@ import '../../App.scss';
 import './Login.scss';
 
 class Login extends Component {
+  // state = {
+  //   email: '',
+  //   password: '',
+  // };
   state = {
-    email: '',
-    password: '',
+    email: 'bob@gmail.com',
+    password: 'password123',
   };
 
   onChange = e => {
@@ -19,8 +25,10 @@ class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log('submitting');
+
+    this.props.login(this.state, this.props.history);
   };
+
   render() {
     return (
       <div className="login-container">
@@ -39,7 +47,9 @@ class Login extends Component {
               value={this.state.password}
               onChange={this.onChange}
             />
-            {/* TODO: Add invalid creds error handling */}
+            {this.props.error ? (
+              <div className="login__error">Invalid email and/or password</div>
+            ) : null}
             <button className="login__button">Submit</button>
           </Form>
         </div>
@@ -49,7 +59,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  isAuthenticated: selectAuthStatus(state),
+  error: selectLoginError(state),
 });
 
 export default connect(
