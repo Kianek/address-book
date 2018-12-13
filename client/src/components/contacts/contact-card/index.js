@@ -1,22 +1,36 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './ContactCard.scss';
 
 function ContactCard(props) {
+  const { name, phone, email, address, _id } = props;
+  const fullName = `${name.first} ${name.middle ? name.middle : ''} ${
+    name.last
+  }`;
   return (
     <li className="contact-card">
-      <h2 className="heading">First Middle Last</h2>
-      <p>Phone: 555-555-5555</p>
-      <p>Email: cortez@williams.com</p>
+      <div className="contact-card__header">
+        <h2 className="contact-card__name">{fullName}</h2>
+        <Link to={`/${_id}/edit`} className="contact-card__btn--edit">
+          <i className="fas fa-edit" />
+        </Link>
+        <button className="contact-card__btn--delete">
+          <i className="fas fa-times" />
+        </button>
+      </div>
+      <h3 className="heading">Contact</h3>
+      <p>Phone: {phone}</p>
+      <p>Email: {email}</p>
       <h3 className="heading">Address</h3>
       <div className="street-address">
-        <p>Line 1</p>
-        <p>Line 2</p>
+        <p>{address.line1}</p>
+        <p>{address.line2}</p>
       </div>
       <div className="city-state-zip">
-        <p>City:</p>
-        <p>State:</p>
-        <p>Zip:</p>
+        <p>City: {address.city}</p>
+        <p>State: {address.state}</p>
+        <p>Zip: {address.zip}</p>
       </div>
     </li>
   );
