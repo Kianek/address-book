@@ -22,6 +22,14 @@ const initialState = {
   error: {},
 };
 
+// Selectors
+export const selectName = state => state.user.name;
+export const selectId = state => state.user.id;
+export const selectAllContacts = state => state.user.contacts;
+export const isContactsEmpty = state => state.user.contacts.length === 0;
+export const selectCurrentContact = state => state.user.currentContact;
+export const isLoading = state => state.user.loading;
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
@@ -41,7 +49,7 @@ export default (state = initialState, action) => {
         ...state,
         contacts: action.payload,
         loading: false,
-        errors: [],
+        error: {},
       };
     case FETCH_CONTACTS_FAILURE:
       return {
