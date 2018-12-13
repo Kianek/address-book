@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addContact } from '../../redux/reducers/user/actions';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import Form from '../common/form/Form';
@@ -24,6 +27,39 @@ class AddContact extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+
+    // TODO: Add validation to prevent empty fields
+
+    const {
+      firstName,
+      middleName,
+      lastName,
+      phone,
+      email,
+      line1,
+      line2,
+      city,
+      state,
+      zip,
+    } = this.state;
+    const newContact = {
+      name: {
+        first: firstName,
+        middle: middleName,
+        last: lastName,
+      },
+      phone,
+      email,
+      address: {
+        line1,
+        line2,
+        city,
+        state,
+        zip,
+      },
+    };
+
+    this.props.addContact(newContact, this.props.history);
   };
 
   render() {
@@ -97,7 +133,7 @@ class AddContact extends Component {
               value={this.state.zip}
               onChange={this.onChange}
             />
-            <button className="btnSubmit">Create Account</button>
+            <button className="form__submit">Submit</button>
           </Form>
         </div>
       </div>
@@ -105,4 +141,11 @@ class AddContact extends Component {
   }
 }
 
-export default AddContact;
+AddContact.propTypes = {
+  addContact: PropTypes.func.isRequired,
+};
+
+export default connect(
+  null,
+  { addContact }
+)(AddContact);
