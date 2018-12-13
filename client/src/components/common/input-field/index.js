@@ -5,7 +5,7 @@ import './InputField.scss';
 
 function InputField({ type, label, name, placeholder, value, onChange }) {
   return (
-    <div class="input-group">
+    <div className="input-group">
       {label && (
         <React.Fragment>
           <label className="input-field__label">{label}:</label>
