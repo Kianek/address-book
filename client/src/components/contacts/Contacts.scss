@@ -2,7 +2,8 @@
 
 .contacts {
   margin: 1em auto;
-  width: 80%;
+  min-width: 50%;
+  max-width: 600px;
 }
 .contacts__heading {
   text-align: center;
@@ -12,7 +13,7 @@
   align-items: center;
   margin: 0 auto;
   height: 4em;
-  width: 70%;
+  width: 300px;
 }
 .contacts__controls__button--add {
   background-color: $light-gray;
