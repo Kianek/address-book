@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { addContact } from '../../redux/reducers/user/actions';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
-import Form from '../common/form/Form';
+import Form from '../common/form';
 import InputField from '../common/input-field';
 
 class AddContact extends Component {

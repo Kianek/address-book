@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { login } from '../../redux/reducers/auth/actions';
 import { selectLoginError, selectAuthStatus } from '../../redux/reducers/auth';
 
-import Form from '../common/form/Form';
+import Form from '../common/form';
 import InputField from '../common/input-field';
 
 import '../../App.scss';
