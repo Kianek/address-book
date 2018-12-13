@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../App.scss';
 import './Register.scss';
-import Form from '../common/form/Form';
+import Form from '../common/form';
 import InputField from '../common/input-field';
 
 class Register extends Component {
