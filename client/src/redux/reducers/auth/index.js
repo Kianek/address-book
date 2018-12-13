@@ -6,6 +6,17 @@ const initialState = {
   loading: false,
 };
 
+/* Selectors */
+export const selectAuthStatus = state => {
+  return state.auth.isAuthenticated;
+};
+export const selectLoginError = state => {
+  return state.auth.error;
+};
+export const selectAuthLoading = state => {
+  return state.auth.loading;
+};
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
@@ -13,6 +24,7 @@ export default (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         loading: false,
+        error: false,
       };
     case LOGIN_FAILURE:
       return {
@@ -30,6 +42,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: false,
+        error: false,
+        loading: false,
       };
     default:
       return state;
