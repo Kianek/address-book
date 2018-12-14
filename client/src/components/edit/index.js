@@ -83,7 +83,7 @@ class EditContact extends Component {
     return (
       <div className="add-contact-page">
         <div className="form-container">
-          <Link to="/contacts" className="btnBack">
+          <Link to="/contacts" className="form__button--back">
             <i className="fas fa-arrow-circle-left" />
             Back to Contacts
           </Link>
