@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect';
 import {
   GET_CONTACT,
   FETCH_CONTACTS,
@@ -17,17 +18,28 @@ const initialState = {
   name: '',
   id: '',
   contacts: [],
-  currentContact: {},
+  currentContact: '',
   loading: false,
   error: {},
 };
 
-// Selectors
+/* Selectors */
 export const selectName = state => state.user.name;
+
 export const selectId = state => state.user.id;
+
 export const selectAllContacts = state => state.user.contacts;
-export const isContactsEmpty = state => state.user.contacts.length === 0;
+
 export const selectCurrentContact = state => state.user.currentContact;
+
+export const loadCurrentContact = createSelector(
+  selectAllContacts,
+  selectCurrentContact,
+  (contacts, id) => contacts.find(c => c._id === id)
+);
+
+export const isContactsEmpty = state => state.user.contacts.length === 0;
+
 export const isLoading = state => state.user.loading;
 
 export default (state = initialState, action) => {
