@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './ContactCard.scss';
 
 function ContactCard(props) {
-  const { name, phone, email, address, _id } = props;
+  const { name, phone, email, address, _id, onEditClick } = props;
   const fullName = `${name.first} ${name.middle ? name.middle : ''} ${
     name.last
   }`;
@@ -12,7 +12,11 @@ function ContactCard(props) {
     <li className="contact-card">
       <div className="contact-card__header">
         <h2 className="contact-card__name">{fullName}</h2>
-        <Link to={`/${_id}/edit`} className="contact-card__btn--edit">
+        <Link
+          to={`/${_id}/edit`}
+          className="contact-card__btn--edit"
+          onClick={onEditClick.bind(this, _id)}
+        >
           <i className="fas fa-edit" />
         </Link>
         <button className="contact-card__btn--delete">
