@@ -1,18 +1,22 @@
 @import '../../../App.scss';
 
+// TODO: confirm that this style is unused
 .form-container {
-  display: flex;
-  flex-direction: column;
-  margin: 3em auto 5em;
-  align-content: center;
-  overflow-y: auto;
+  margin: 1em auto 5em;
+}
+.form__button--back {
+  color: $dark-gray;
+  margin-left: 2em;
+}
+.form__button--back:hover {
+  color: $light-blue;
 }
 .form {
   background-color: $whiteish;
   border-radius: 1em;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 2em auto;
   padding: 2em 1em;
   width: 20em;
 }
