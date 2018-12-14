@@ -4,8 +4,9 @@ import {
   isContactsEmpty,
   selectAllContacts,
   isLoading,
+  loadCurrentContact,
 } from '../../redux/reducers/user';
-import { fetchContacts } from '../../redux/reducers/user/actions';
+import { fetchContacts, getContact } from '../../redux/reducers/user/actions';
 import { Link } from 'react-router-dom';
 import ContactCard from './contact-card';
 
@@ -18,7 +19,13 @@ class Contacts extends Component {
   }
 
   format = contacts =>
-    contacts.map(contact => <ContactCard key={contact._id} {...contact} />);
+    contacts.map(contact => (
+      <ContactCard
+        key={contact._id}
+        onEditClick={this.props.getContact}
+        {...contact}
+      />
+    ));
 
   render() {
     const { contacts, isContactsEmpty, isLoading } = this.props;
@@ -56,5 +63,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchContacts }
+  { fetchContacts, getContact, loadCurrentContact }
 )(Contacts);
