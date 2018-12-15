@@ -1,10 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { deleteContact } from '../../../redux/reducers/user/actions';
 
 import './ContactCard.scss';
 
 function ContactCard(props) {
-  const { name, phone, email, address, _id, onEditClick } = props;
+  const {
+    name,
+    phone,
+    email,
+    address,
+    _id,
+    onEditClick,
+    deleteContact,
+  } = props;
   const fullName = `${name.first} ${name.middle ? name.middle : ''} ${
     name.last
   }`;
@@ -19,7 +29,10 @@ function ContactCard(props) {
         >
           <i className="fas fa-edit" />
         </Link>
-        <button className="contact-card__btn--delete">
+        <button
+          onClick={deleteContact.bind(this, _id)}
+          className="contact-card__btn--delete"
+        >
           <i className="fas fa-times" />
         </button>
       </div>
@@ -40,4 +53,7 @@ function ContactCard(props) {
   );
 }
 
-export default ContactCard;
+export default connect(
+  null,
+  { deleteContact }
+)(ContactCard);
