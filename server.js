@@ -1,5 +1,6 @@
 const express = require('express');
-const session = require('express-session');
+// const session = require('express-session');
+const session = require('cookie-session');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const helmet = require('helmet');
@@ -20,9 +21,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(
   session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: false,
+    name: 'session',
+    keys: ['secret'],
+
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
   })
 );
 app.use(passport.initialize());
