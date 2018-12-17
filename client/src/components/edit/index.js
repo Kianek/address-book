@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { editContact } from '../../redux/reducers/user/actions';
-import { loadCurrentContact } from '../../redux/reducers/user';
+import {
+  editContact,
+  emptyFormError,
+  clearErrors,
+} from '../../redux/reducers/user/actions';
+import { loadCurrentContact, selectError } from '../../redux/reducers/user';
 import { Link, withRouter } from 'react-router-dom';
 import '../../App.scss';
 import Form from '../common/form';
 import InputField from '../common/input-field';
+import isEmpty from '../../helpers/is-empty';
 
 class EditContact extends Component {
   state = {
@@ -46,6 +51,13 @@ class EditContact extends Component {
   onSubmit = e => {
     e.preventDefault();
 
+    if (isEmpty(this.state)) {
+      this.props.emptyFormError();
+      return;
+    } else {
+      this.props.clearErrors();
+    }
+
     const {
       firstName,
       middleName,
@@ -80,6 +92,8 @@ class EditContact extends Component {
   };
 
   render() {
+    const { error } = this.props;
+
     return (
       <div className="add-contact-page">
         <div className="form-container">
@@ -150,6 +164,7 @@ class EditContact extends Component {
               value={this.state.zip}
               onChange={this.onChange}
             />
+            {error && <div className="form__error">{error.msg}</div>}
             <button className="form__submit">Submit</button>
           </Form>
         </div>
@@ -165,11 +180,12 @@ EditContact.propTypes = {
 
 const mapStateToProps = state => ({
   currentContact: loadCurrentContact(state),
+  error: selectError(state),
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { editContact, loadCurrentContact }
+    { editContact, loadCurrentContact, emptyFormError, clearErrors }
   )(EditContact)
 );
