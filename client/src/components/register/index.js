@@ -1,5 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { selectError } from '../../redux/reducers/user';
+import { clearErrors, emptyFormError } from '../../redux/reducers/user/actions';
+import isEmpty from '../../helpers/is-empty';
 import axios from 'axios';
 import '../../App.scss';
 import './Register.scss';
@@ -20,7 +24,14 @@ class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    // TODO: check for invalid input
+
+    if (isEmpty(this.state)) {
+      this.props.emptyFormError();
+      return;
+    } else {
+      this.props.clearErrors();
+    }
+
     const { name, email, password } = this.state;
     const newUser = {
       name,
@@ -34,13 +45,15 @@ class Register extends Component {
   };
 
   render() {
+    const { error } = this.props;
+
     return (
       <Fragment>
-        <Link to="/" className="btnBack">
-          <i className="fas fa-arrow-circle-left" />
-          Back to Login
-        </Link>
         <div className="form-container">
+          <Link to="/" className="form__button--back">
+            <i className="fas fa-arrow-circle-left" />
+            Back to Login
+          </Link>
           <Form title="Register" onSubmit={this.onSubmit}>
             <InputField
               label="Name"
@@ -68,7 +81,8 @@ class Register extends Component {
               value={this.state.password2}
               onChange={this.onChange}
             />
-            <button className="btnSubmit">Create Account</button>
+            {error && <div className="form__error">{error.msg}</div>}
+            <button className="form__submit">Create Account</button>
           </Form>
         </div>
       </Fragment>
@@ -76,4 +90,15 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapStateToProps = state => ({
+  error: selectError(state),
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    selectError,
+    clearErrors,
+    emptyFormError,
+  }
+)(Register);
