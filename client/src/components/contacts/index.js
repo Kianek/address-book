@@ -15,13 +15,9 @@ import Loading from '../common/spinner';
 
 class Contacts extends Component {
   componentDidMount() {
-    // this.props.fetchContacts();
-    this.prepContacts().then(() => this.format(this));
+    this.props.fetchContacts();
   }
 
-  prepContacts = async () => {
-    this.props.fetchContacts();
-  };
   format = contacts =>
     contacts.map(contact => (
       <ContactCard
