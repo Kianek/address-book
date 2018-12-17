@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addContact } from '../../redux/reducers/user/actions';
+import { selectError } from '../../redux/reducers/user';
+import {
+  addContact,
+  emptyFormError,
+  clearErrors,
+} from '../../redux/reducers/user/actions';
 import { Link } from 'react-router-dom';
+import isEmpty from '../../helpers/is-empty';
 import '../../App.scss';
 import Form from '../common/form';
 import InputField from '../common/input-field';
@@ -28,7 +34,14 @@ class AddContact extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    // TODO: Add validation to prevent empty fields
+    // TODO: dispatch empty field error
+    if (isEmpty(this.state)) {
+      console.log('state is empty!');
+      this.props.emptyFormError();
+      return;
+    } else {
+      this.props.clearErrors();
+    }
 
     const {
       firstName,
@@ -63,6 +76,8 @@ class AddContact extends Component {
   };
 
   render() {
+    const { error } = this.props;
+
     return (
       <div className="add-contact-page">
         <div className="form-container">
@@ -133,6 +148,7 @@ class AddContact extends Component {
               value={this.state.zip}
               onChange={this.onChange}
             />
+            {error && <div className="form__error">{error.msg}</div>}
             <button className="form__submit">Submit</button>
           </Form>
         </div>
@@ -143,9 +159,15 @@ class AddContact extends Component {
 
 AddContact.propTypes = {
   addContact: PropTypes.func.isRequired,
+  emptyFormError: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = state => ({
+  error: selectError(state),
+});
+
 export default connect(
-  null,
-  { addContact }
+  mapStateToProps,
+  { addContact, emptyFormError, selectError, clearErrors }
 )(AddContact);
