@@ -21,7 +21,6 @@ import {
 import axios from 'axios';
 
 /* Fetch Action Creators */
-// TODO: rename so that the action better matches the reducer
 const beginFetch = () => ({ type: FETCH_CONTACTS });
 const fetchSuccessful = data => ({
   type: FETCH_CONTACTS_SUCCESS,
