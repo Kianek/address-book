@@ -103,7 +103,7 @@ router.delete('/:id/delete', ensureAuthenticated, (req, res) => {
 
       user
         .save()
-        .then(user => res.status(200).json(user))
+        .then(user => res.status(200).json(user.contacts))
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
