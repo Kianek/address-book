@@ -10,6 +10,14 @@ import {
   EDIT_CONTACT,
   EDIT_CONTACT_SUCCESS,
   EDIT_CONTACT_FAILURE,
+  DELETE_CONTACT,
+  DELETE_CONTACT_SUCCESS,
+  DELETE_CONTACT_FAILURE,
+  DELETE_ALL,
+  DELETE_ALL_SUCCESS,
+  DELETE_ALL_FAILURE,
+  CLEAR_ERRORS,
+  EMPTY_FORM_ERROR,
 } from './types';
 
 import { LOGIN_SUCCESS } from '../auth/types';
@@ -41,6 +49,8 @@ export const loadCurrentContact = createSelector(
 export const isContactsEmpty = state => state.user.contacts.length === 0;
 
 export const isLoading = state => state.user.loading;
+
+export const selectError = state => state.user.error;
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -107,6 +117,50 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case DELETE_CONTACT:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_CONTACT_SUCCESS:
+      return {
+        ...state,
+        contacts: action.payload,
+        loading: false,
+      };
+    case DELETE_CONTACT_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case DELETE_ALL:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_ALL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        contacts: [],
+      };
+    case DELETE_ALL_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case EMPTY_FORM_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: {},
       };
     default:
       return state;
