@@ -10,14 +10,15 @@ import '../../App.scss';
 import './Login.scss';
 
 class Login extends Component {
-  // state = {
-  //   email: '',
-  //   password: '',
-  // };
+  // TODO: uncomment this
   state = {
-    email: 'bob@gmail.com',
-    password: 'password123',
+    email: '',
+    password: '',
   };
+  // state = {
+  //   email: 'bob@gmail.com',
+  //   password: 'password123',
+  // };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
