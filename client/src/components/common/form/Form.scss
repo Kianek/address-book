@@ -24,6 +24,12 @@
   margin-bottom: 0.7em;
   text-align: center;
 }
+.form__error {
+  color: $danger;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
 .form__submit {
   background-color: $light-gray;
   border: none;
