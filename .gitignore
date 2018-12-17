@@ -1,4 +1,4 @@
 /node_modules
 .vscode
 .package-lock.json
-keys_dev.js
+/config/keys_dev.js
