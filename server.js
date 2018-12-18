@@ -32,7 +32,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Initialize MongoDB
-const db = require('./config/keys_prod').mongoURI;
+const db = require('./config/keys').mongoURI;
 mongoose
   .connect(
     db,
