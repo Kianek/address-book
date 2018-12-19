@@ -13,24 +13,3 @@ $white: #fff;
 
 /* Shadows */
 $bottom-shadow: 0 8px 5px -4px rgba(0, 0, 0, 0.2);
-$shadow: 8px 8px 5px rgba(0, 0, 0, 0.2), -5px -5px -4px rgba(0, 0, 0, 0.2);
-
-/* Form Styles?? */
-
-// TODO: write a button component
-.btnBack {
-  color: $dark-gray;
-}
-.btnBack:hover {
-  color: $light-blue;
-}
-
-.btnSubmit {
-  border: none;
-  border-radius: 0.5em;
-  font-size: 1em;
-  height: 2.5em;
-  margin: 0 auto;
-  width: 13em;
-  transition: 0.2s;
-}
