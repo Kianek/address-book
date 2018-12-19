@@ -18,7 +18,7 @@
 .contacts__controls__button--add {
   background-color: $light-gray;
   border-radius: 0.5em;
-  color: $white;
+  color: $gun-metal;
   font-weight: 500;
   padding: 0.5em 1em;
   text-align: center;
@@ -27,13 +27,14 @@
 }
 .contacts__controls__button--add:hover {
   background-color: $success;
+  color: $white;
   cursor: pointer;
 }
 .contacts__controls__button--delete-all {
   background-color: $light-gray;
   border: none;
   border-radius: 0.5em;
-  color: $white;
+  color: $gun-metal;
   font-family: Arial;
   font-size: 1em;
   margin-left: auto;
@@ -42,6 +43,7 @@
 }
 .contacts__controls__button--delete-all:hover {
   background-color: $danger;
+  color: $white;
   cursor: pointer;
 }
 .contacts__list {
