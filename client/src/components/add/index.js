@@ -8,7 +8,7 @@ import {
   clearErrors,
 } from '../../redux/reducers/user/actions';
 import { Link } from 'react-router-dom';
-import isEmpty from '../../helpers/is-empty';
+import { isEmpty, createNewContactFrom } from '../../helpers';
 import '../../App.scss';
 import Form from '../common/form';
 import InputField from '../common/input-field';
@@ -34,43 +34,14 @@ class AddContact extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    // TODO: dispatch empty field error
     if (isEmpty(this.state)) {
-      console.log('state is empty!');
       this.props.emptyFormError();
       return;
     } else {
       this.props.clearErrors();
     }
 
-    const {
-      firstName,
-      middleName,
-      lastName,
-      phone,
-      email,
-      line1,
-      line2,
-      city,
-      state,
-      zip,
-    } = this.state;
-    const newContact = {
-      name: {
-        first: firstName,
-        middle: middleName,
-        last: lastName,
-      },
-      phone,
-      email,
-      address: {
-        line1,
-        line2,
-        city,
-        state,
-        zip,
-      },
-    };
+    const newContact = createNewContactFrom(this.state);
 
     this.props.addContact(newContact, this.props.history);
   };
@@ -161,6 +132,7 @@ AddContact.propTypes = {
   addContact: PropTypes.func.isRequired,
   emptyFormError: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
+  selectError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
