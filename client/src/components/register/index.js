@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectError } from '../../redux/reducers/user';
 import { clearErrors, emptyFormError } from '../../redux/reducers/user/actions';
 import { isEmpty } from '../../helpers/';
 import axios from 'axios';
-import '../../App.scss';
-import './Register.scss';
 import Form from '../common/form';
 import InputField from '../common/input-field';
 
@@ -89,6 +88,13 @@ class Register extends Component {
     );
   }
 }
+
+Register.propTypes = {
+  error: PropTypes.objectOf(PropTypes.string),
+  selectError: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+  emptyFormError: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   error: selectError(state),
