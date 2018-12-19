@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import './InputField.scss';
@@ -7,10 +7,10 @@ function InputField({ type, label, name, placeholder, value, onChange }) {
   return (
     <div className="input-group">
       {label && (
-        <React.Fragment>
+        <Fragment>
           <label className="input-field__label">{label}:</label>
           <br />
-        </React.Fragment>
+        </Fragment>
       )}
       <input
         className="input-field"
@@ -33,7 +33,7 @@ InputField.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  value: PropTypes.any,
+  value: PropTypes.string,
   onChange: PropTypes.func,
 };
 
