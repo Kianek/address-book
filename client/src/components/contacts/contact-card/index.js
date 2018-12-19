@@ -1,20 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deleteContact } from '../../../redux/reducers/user/actions';
 
 import './ContactCard.scss';
 
-function ContactCard(props) {
-  const {
-    name,
-    phone,
-    email,
-    address,
-    _id,
-    onEditClick,
-    deleteContact,
-  } = props;
+function ContactCard({
+  name,
+  phone,
+  email,
+  address,
+  _id,
+  onEditClick,
+  deleteContact,
+}) {
   const fullName = `${name.first} ${name.middle ? name.middle : ''} ${
     name.last
   }`;
@@ -52,6 +52,26 @@ function ContactCard(props) {
     </li>
   );
 }
+
+ContactCard.propTypes = {
+  name: PropTypes.shape({
+    first: PropTypes.string.isRequired,
+    middle: PropTypes.string,
+    last: PropTypes.string.isRequired,
+  }).isRequired,
+  phone: PropTypes.string,
+  email: PropTypes.string,
+  address: PropTypes.shape({
+    line1: PropTypes.string.isRequired,
+    line2: PropTypes.string,
+    city: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    zip: PropTypes.string.isRequired,
+  }),
+  _id: PropTypes.string,
+  onEditClick: PropTypes.func.isRequired,
+  deleteContact: PropTypes.func.isRequired,
+};
 
 export default connect(
   null,
