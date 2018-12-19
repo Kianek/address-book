@@ -1,18 +1,19 @@
 import axios from 'axios';
 import { LOGOUT, LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from './types';
 
-/* Simple Action Creators */
+/* Login Action Creators */
 const beginLogin = () => ({ type: LOGIN });
+
 const loginSuccessful = data => ({
   type: LOGIN_SUCCESS,
   payload: data,
 });
+
 const loginUnsuccessful = err => ({
   type: LOGIN_FAILURE,
   payload: err,
 });
 
-// export const login = credentials => dispatch => {
 export const login = (credentials, history) => dispatch => {
   dispatch(beginLogin());
   axios
@@ -20,7 +21,6 @@ export const login = (credentials, history) => dispatch => {
     .then(res => dispatch(loginSuccessful(res.data)))
     .then(() => history.replace('/contacts'))
     .catch(err => {
-      console.log(err);
       dispatch(loginUnsuccessful(err));
     });
 };
