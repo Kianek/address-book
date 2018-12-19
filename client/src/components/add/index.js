@@ -129,6 +129,7 @@ class AddContact extends Component {
 }
 
 AddContact.propTypes = {
+  error: PropTypes.shape({ error: PropTypes.string }),
   addContact: PropTypes.func.isRequired,
   emptyFormError: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
