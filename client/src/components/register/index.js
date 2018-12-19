@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectError } from '../../redux/reducers/user';
 import { clearErrors, emptyFormError } from '../../redux/reducers/user/actions';
-import isEmpty from '../../helpers/is-empty';
+import { isEmpty } from '../../helpers/';
 import axios from 'axios';
 import '../../App.scss';
 import './Register.scss';
