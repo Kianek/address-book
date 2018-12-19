@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   isContactsEmpty,
@@ -6,12 +7,16 @@ import {
   isLoading,
   loadCurrentContact,
 } from '../../redux/reducers/user';
-import { fetchContacts, getContact } from '../../redux/reducers/user/actions';
+import {
+  fetchContacts,
+  getContact,
+  deleteAll,
+} from '../../redux/reducers/user/actions';
 import { Link } from 'react-router-dom';
 import ContactCard from './contact-card';
+import Loading from '../common/spinner';
 
 import './Contacts.scss';
-import Loading from '../common/spinner';
 
 class Contacts extends Component {
   componentDidMount() {
@@ -37,7 +42,10 @@ class Contacts extends Component {
           <Link to="/add" className="contacts__controls__button--add">
             <i className="fas fa-plus" /> Add
           </Link>
-          <button className="contacts__controls__button--delete-all">
+          <button
+            onClick={this.props.deleteAll}
+            className="contacts__controls__button--delete-all"
+          >
             <i className="fas fa-times" /> Delete All
           </button>
         </div>
@@ -55,6 +63,15 @@ class Contacts extends Component {
   }
 }
 
+Contacts.propTypes = {
+  contacts: PropTypes.arrayOf(PropTypes.object),
+  isLoading: PropTypes.bool.isRequired,
+  isContactsEmpty: PropTypes.bool.isRequired,
+  fetchContacts: PropTypes.func.isRequired,
+  getContact: PropTypes.func.isRequired,
+  loadCurrentContact: PropTypes.func.isRequired,
+  deleteAll: PropTypes.func.isRequired,
+};
 const mapStateToProps = state => ({
   contacts: selectAllContacts(state),
   isContactsEmpty: isContactsEmpty(state),
@@ -63,5 +80,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchContacts, getContact, loadCurrentContact }
+  { fetchContacts, getContact, loadCurrentContact, deleteAll }
 )(Contacts);
