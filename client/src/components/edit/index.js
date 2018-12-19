@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -7,11 +8,10 @@ import {
   clearErrors,
 } from '../../redux/reducers/user/actions';
 import { loadCurrentContact, selectError } from '../../redux/reducers/user';
-import { Link, withRouter } from 'react-router-dom';
-import '../../App.scss';
+import { isEmpty, createNewContactFrom } from '../../helpers';
 import Form from '../common/form';
 import InputField from '../common/input-field';
-import isEmpty from '../../helpers/is-empty';
+import '../../App.scss';
 
 class EditContact extends Component {
   state = {
@@ -58,35 +58,11 @@ class EditContact extends Component {
       this.props.clearErrors();
     }
 
-    const {
-      firstName,
-      middleName,
-      lastName,
-      phone,
-      email,
-      line1,
-      line2,
-      city,
-      state,
-      zip,
-    } = this.state;
-    const newContact = {
-      _id: this.props.match.params.id,
-      name: {
-        first: firstName,
-        middle: middleName,
-        last: lastName,
-      },
-      phone,
-      email,
-      address: {
-        line1,
-        line2,
-        city,
-        state,
-        zip,
-      },
-    };
+    const newContact = createNewContactFrom(this.state);
+
+    // The backend API searches the database by id
+    // to find the proper contact to update
+    newContact._id = this.props.match.params.id;
 
     this.props.editContact(newContact, this.props.history);
   };
@@ -95,79 +71,77 @@ class EditContact extends Component {
     const { error } = this.props;
 
     return (
-      <div className="add-contact-page">
-        <div className="form-container">
-          <Link to="/contacts" className="form__button--back">
-            <i className="fas fa-arrow-circle-left" />
-            Back to Contacts
-          </Link>
-          <Form title="Edit Contact" onSubmit={this.onSubmit}>
-            <InputField
-              label="First Name"
-              name="firstName"
-              value={this.state.firstName}
-              onChange={this.onChange}
-            />
-            <InputField
-              label="Middle Name"
-              name="middleName"
-              placeholder="(Optional)"
-              value={this.state.middleName}
-              onChange={this.onChange}
-            />
-            <InputField
-              label="Last Name"
-              name="lastName"
-              value={this.state.lastName}
-              onChange={this.onChange}
-            />
-            <InputField
-              label="Phone"
-              name="phone"
-              value={this.state.phone}
-              onChange={this.onChange}
-            />
-            <InputField
-              label="Email"
-              name="email"
-              value={this.state.email}
-              onChange={this.onChange}
-            />
-            <InputField
-              label="Line 1"
-              name="line1"
-              value={this.state.line1}
-              onChange={this.onChange}
-            />
-            <InputField
-              label="Line 2"
-              name="line2"
-              placeholder="(Optional)"
-              value={this.state.line2}
-              onChange={this.onChange}
-            />
-            <InputField
-              label="City"
-              name="city"
-              value={this.state.city}
-              onChange={this.onChange}
-            />
-            <InputField
-              label="State"
-              name="state"
-              value={this.state.state}
-              onChange={this.onChange}
-            />
-            <InputField
-              label="Zip"
-              name="zip"
-              value={this.state.zip}
-              onChange={this.onChange}
-            />
-            {error && <div className="form__error">{error.msg}</div>}
-            <button className="form__submit">Submit</button>
-          </Form>
-        </div>
+      <div className="form-container">
+        <Link to="/contacts" className="form__button--back">
+          <i className="fas fa-arrow-circle-left" />
+          Back to Contacts
+        </Link>
+        <Form title="Edit Contact" onSubmit={this.onSubmit}>
+          <InputField
+            label="First Name"
+            name="firstName"
+            value={this.state.firstName}
+            onChange={this.onChange}
+          />
+          <InputField
+            label="Middle Name"
+            name="middleName"
+            placeholder="(Optional)"
+            value={this.state.middleName}
+            onChange={this.onChange}
+          />
+          <InputField
+            label="Last Name"
+            name="lastName"
+            value={this.state.lastName}
+            onChange={this.onChange}
+          />
+          <InputField
+            label="Phone"
+            name="phone"
+            value={this.state.phone}
+            onChange={this.onChange}
+          />
+          <InputField
+            label="Email"
+            name="email"
+            value={this.state.email}
+            onChange={this.onChange}
+          />
+          <InputField
+            label="Line 1"
+            name="line1"
+            value={this.state.line1}
+            onChange={this.onChange}
+          />
+          <InputField
+            label="Line 2"
+            name="line2"
+            placeholder="(Optional)"
+            value={this.state.line2}
+            onChange={this.onChange}
+          />
+          <InputField
+            label="City"
+            name="city"
+            value={this.state.city}
+            onChange={this.onChange}
+          />
+          <InputField
+            label="State"
+            name="state"
+            value={this.state.state}
+            onChange={this.onChange}
+          />
+          <InputField
+            label="Zip"
+            name="zip"
+            value={this.state.zip}
+            onChange={this.onChange}
+          />
+          {error && <div className="form__error">{error.msg}</div>}
+          <button className="form__submit">Submit</button>
+        </Form>
       </div>
     );
   }
@@ -176,6 +150,8 @@ class EditContact extends Component {
 EditContact.propTypes = {
   editContact: PropTypes.func.isRequired,
   loadCurrentContact: PropTypes.func.isRequired,
+  emptyFormError: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
