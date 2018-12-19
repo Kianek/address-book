@@ -11,7 +11,6 @@ import { loadCurrentContact, selectError } from '../../redux/reducers/user';
 import { isEmpty, createNewContactFrom } from '../../helpers';
 import Form from '../common/form';
 import InputField from '../common/input-field';
-import '../../App.scss';
 
 class EditContact extends Component {
   state = {
@@ -148,6 +147,22 @@ class EditContact extends Component {
 }
 
 EditContact.propTypes = {
+  currentContact: PropTypes.shape({
+    name: PropTypes.shape({
+      first: PropTypes.string.isRequired,
+      middle: PropTypes.string,
+      last: PropTypes.string.isRequired,
+    }).isRequired,
+    phone: PropTypes.string,
+    email: PropTypes.string,
+    address: PropTypes.shape({
+      line1: PropTypes.string.isRequired,
+      line2: PropTypes.string,
+      city: PropTypes.string.isRequired,
+      state: PropTypes.string.isRequired,
+      zip: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
   editContact: PropTypes.func.isRequired,
   loadCurrentContact: PropTypes.func.isRequired,
   emptyFormError: PropTypes.func.isRequired,
