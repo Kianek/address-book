@@ -42,7 +42,7 @@ function ContactCard({
       <h3 className="heading">Address</h3>
       <div className="street-address">
         <p>{address.line1}</p>
-        <p>{address.line2}</p>
+        {address.line2 && <p>{address.line2}</p>}
       </div>
       <div className="city-state-zip">
         <p>City: {address.city}</p>
