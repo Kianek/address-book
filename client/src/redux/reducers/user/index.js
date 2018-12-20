@@ -16,6 +16,9 @@ import {
   DELETE_ALL,
   DELETE_ALL_SUCCESS,
   DELETE_ALL_FAILURE,
+  DELETE_ACCOUNT,
+  DELETE_ACCOUNT_SUCCESS,
+  DELETE_ACCOUNT_FAILURE,
   CLEAR_ERRORS,
   EMPTY_FORM_ERROR,
 } from './types';
@@ -147,6 +150,27 @@ export default (state = initialState, action) => {
         contacts: [],
       };
     case DELETE_ALL_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case DELETE_ACCOUNT:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        name: '',
+        id: '',
+        contacts: [],
+        currentContact: '',
+        loading: false,
+        error: {},
+      };
+    case DELETE_ACCOUNT_FAILURE:
       return {
         ...state,
         loading: false,
