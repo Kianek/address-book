@@ -48,7 +48,6 @@ router.post('/register', (req, res) => {
       password,
     });
 
-    // TODO: send 200 response instead of user object
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(newUser.password, salt, (err, hash) => {
         if (err) throw err;
