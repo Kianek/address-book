@@ -17,6 +17,8 @@ import {
   DELETE_CONTACT,
   EMPTY_FORM_ERROR,
   CLEAR_ERRORS,
+  DELETE_ACCOUNT_SUCCESS,
+  DELETE_ACCOUNT_FAILURE,
 } from './types';
 import axios from 'axios';
 
@@ -133,6 +135,21 @@ export const deleteAll = () => dispatch => {
     .delete(`/api/contacts/delete-all`)
     .then(() => dispatch(deleteAllSuccessful()))
     .catch(err => dispatch(deleteAllUnsuccessful(err)));
+};
+
+/* Delete Account Action Creators */
+const deleteAccountSuccessful = () => ({
+  type: DELETE_ACCOUNT_SUCCESS,
+});
+const deleteAccountUnsuccessful = err => ({
+  type: DELETE_ACCOUNT_FAILURE,
+  payload: err,
+});
+export const deleteAccount = () => dispatch => {
+  axios
+    .delete(`/api/users/delete`)
+    .then(dispatch(deleteAccountSuccessful()))
+    .catch(err => dispatch(deleteAccountUnsuccessful(err)));
 };
 
 /* Empty Form Error Action Creator */
