@@ -55,6 +55,7 @@ class AddContact extends Component {
           Back to Contacts
         </Link>
         <Form title="Add Contact" onSubmit={this.onSubmit}>
+          <h3 className="form__heading">Name</h3>
           <InputField
             label="First Name"
             name="firstName"
@@ -74,6 +75,7 @@ class AddContact extends Component {
             value={this.state.lastName}
             onChange={this.onChange}
           />
+          <h3 className="form__heading">Contact</h3>
           <InputField
             label="Phone"
             name="phone"
@@ -86,6 +88,7 @@ class AddContact extends Component {
             value={this.state.email}
             onChange={this.onChange}
           />
+          <h3 className="form__heading">Address</h3>
           <InputField
             label="Line 1"
             name="line1"
