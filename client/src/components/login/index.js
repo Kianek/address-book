@@ -23,7 +23,11 @@ class Login extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    this.props.login(this.state, this.props.history);
+    const credentials = {
+      email: this.state.email.toLowerCase(),
+      password: this.state.password,
+    };
+    this.props.login(credentials, this.props.history);
   };
 
   render() {
