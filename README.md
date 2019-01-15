@@ -1,6 +1,5 @@
-# address-book
+# Address Book
 A contact management app
-
 
 ## Why use your memory when you can use this app instead!
 
