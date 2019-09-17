@@ -5,3 +5,5 @@ A contact management app
 
 Do you have lots of friends and family? Do you have the desire to remember their contact information without having to commit any of it to memory? Well, there's an app for it. This one!
 
+Click here to try it out:
+https://imma-add-u12432.herokuapp.com
