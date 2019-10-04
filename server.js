@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const contacts = require('./routes/api/contacts');
 const users = require('./routes/api/users');
 
+require('dotenv').config();
 const app = express();
 
 // Configure Passport
@@ -34,10 +35,7 @@ app.use(passport.session());
 // Initialize MongoDB
 const db = require('./config/keys').mongoURI;
 mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true }
-  )
+  .connect(db, { useNewUrlParser: true })
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.log(err));
 
