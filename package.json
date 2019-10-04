@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix client",
+    "client": "yarn start --prefix client",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
     "heroku-postbuild": "YARN_CONFIG_PRODUCTION=false yarn add --prefix client && yarn run build --prefix client"
   },
