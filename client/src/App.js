@@ -4,11 +4,11 @@ import PrivateRoute from './components/common/PrivateRoute';
 import './App.scss';
 import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer';
-import Login from './components/login';
-import Register from './components/register';
-import Contacts from './components/contacts';
-import AddContact from './components/add';
-import EditContact from './components/edit';
+import Login from './pages/login';
+import Register from './pages/register';
+import Contacts from './pages/contacts';
+import AddContact from './pages/add';
+import EditContact from './pages/edit';
 
 class App extends Component {
   render() {
