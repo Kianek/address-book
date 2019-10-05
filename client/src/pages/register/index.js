@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectError } from '../../redux/reducers/user';
 import { clearErrors, emptyFormError } from '../../redux/reducers/user/actions';
-import { isEmpty } from '../../helpers/';
+import { isEmpty } from '../../helpers';
 import axios from 'axios';
-import Form from '../common/form';
-import InputField from '../common/input-field';
+import Form from '../../components/common/form';
+import InputField from '../../components/common/input-field';
 
 class Register extends Component {
   state = {

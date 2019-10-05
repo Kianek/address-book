@@ -9,8 +9,8 @@ import {
 } from '../../redux/reducers/user/actions';
 import { loadCurrentContact, selectError } from '../../redux/reducers/user';
 import { isEmpty, createNewContactFrom } from '../../helpers';
-import Form from '../common/form';
-import InputField from '../common/input-field';
+import Form from '../../components/common/form';
+import InputField from '../../components/common/input-field';
 
 class EditContact extends Component {
   state = {

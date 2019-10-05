@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { login } from '../../redux/reducers/auth/actions';
 import { selectLoginError, selectAuthStatus } from '../../redux/reducers/auth';
 
-import Form from '../common/form';
-import InputField from '../common/input-field';
+import Form from '../../components/common/form';
+import InputField from '../../components/common/input-field';
 
 import '../../App.scss';
 import './Login.scss';

@@ -14,7 +14,7 @@ import {
 } from '../../redux/reducers/user/actions';
 import { Link } from 'react-router-dom';
 import ContactCard from './contact-card';
-import Loading from '../common/spinner';
+import Loading from '../../components/common/spinner';
 
 import './Contacts.scss';
 
