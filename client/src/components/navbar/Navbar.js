@@ -11,7 +11,7 @@ import './Navbar.scss';
 function Navbar({ isAuthenticated, logout, deleteAccount }) {
   if (isAuthenticated) {
     return (
-      <nav className="navbar">
+      <nav className="navbar container">
         <Link to="/contacts" className="navbar__branding">
           Address Book
         </Link>
@@ -25,7 +25,7 @@ function Navbar({ isAuthenticated, logout, deleteAccount }) {
     );
   }
   return (
-    <nav className="navbar">
+    <nav className="navbar container">
       <Link to="/" className="navbar__branding">
         Address Book
       </Link>
