@@ -8,7 +8,6 @@ module.exports = {
     res.json({ msg: 'Not logged in' });
   },
   hashPassword: password => {
-    console.log(password);
     if (!password) {
       return null;
     }
