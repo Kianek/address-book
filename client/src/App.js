@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/common/PrivateRoute';
 import './App.scss';
 import Navbar from './components/navbar/Navbar';
+import Footer from './components/footer';
 import Login from './components/login';
 import Register from './components/register';
 import Contacts from './components/contacts';
@@ -22,6 +23,7 @@ class App extends Component {
             <PrivateRoute path="/add" component={AddContact} />
             <PrivateRoute path="/:id/edit" component={EditContact} />
           </Switch>
+          <Footer />
         </div>
       </Router>
     );
